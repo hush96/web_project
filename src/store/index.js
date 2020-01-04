@@ -1,15 +1,53 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+<<<<<<< HEAD
+Vue.use(Vuex)
 
+export default new Vuex.Store({
+
+})
+=======
+import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    arr: [],
+    count: 0
   },
   mutations: {
+    add(state, obj) {
+      const index = state.arr.findIndex(item => item.id === obj.id)
+      if (index !== -1) {
+        state.arr[index].num += obj.num
+      } else {
+        state.arr.push(obj)
+      }
+      window.localStorage.setItem('arr', JSON.stringify(state.arr))
+      // 次数
+      if (state.arr.length) {
+        let num = 0
+        state.arr.forEach(item => {
+          num += item.num
+        })
+        state.count = num
+      }
+    },
+    get(state) {
+      const arr = window.localStorage.getItem('arr')
+      state.arr = JSON.parse(arr) || []
+      console.log(state.arr)
+      // 次数
+      if (state.arr.length) {
+        let num = 0
+        state.arr.forEach(item => {
+          num += item.num
+        })
+        state.count = num
+      }
+    }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })
+>>>>>>> e3ac08e75e47316204cf97755f058679cdd8ffa0
