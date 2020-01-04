@@ -3,10 +3,10 @@
   <div class="header_box">
     <span @click="$router.go(-1)" v-if="$route.path != '/home'" class="goback">
       <van-icon style="margin-right:3px;" name="arrow-left" />
-      {{ nav1 }}
+      {{nav1}}
     </span>
     {{ nav2 }}
-    <span class="add" @click="addgood" >{{ nav3 }}</span>
+    <span class="add" @click="addgood" >{{nav3}}</span>
   </div>
 </template>
 

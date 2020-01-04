@@ -1,34 +1,32 @@
 <template>
   <div class="goods_list">
+    <Header nav2="黑马程序员"></Header>
+
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-cell
-          v-for="item in goodsList"
-          :key="item.id"
-          @click="toDetails(item.id)"
-          v-lazy="item.img_url"
-        >
+        <van-cell v-for="item in goodsList" :key="item.id" @click="toDetails(item.id)" v-lazy="item.img_url">
           <van-image :src="item.img_url" />
-          <p>{{item.title}}</p>
+          <p>{{ item.title }}</p>
           <div class="bottom_box">
             <div>
-              <span>￥{{item.sell_price}}</span>
-              <s>￥{{item.market_price}}</s>
+              <span>￥{{ item.sell_price }}</span>
+              <s>￥{{ item.market_price }}</s>
             </div>
             <div>
               <span>热卖中</span>
-              <span>剩余{{item.stock_quantity}}件</span>
+              <span>剩余{{ item.stock_quantity }}件</span>
             </div>
           </div>
         </van-cell>
       </van-list>
     </van-pull-refresh>
+    <Tab></Tab>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       goodsList: [],
       query: {
@@ -39,18 +37,18 @@ export default {
       isLoading: false
     }
   },
-  created () {
+  created() {
     this.getGoodsList()
   },
   methods: {
     // 上拉加载
-    onLoad () {
+    onLoad() {
       this.query.pageindex++
       // console.log(this.query.pageindex)
       this.getGoodsList()
     },
     // 下拉刷新
-    onRefresh () {
+    onRefresh() {
       setTimeout(() => {
         this.query.pageindex--
         this.goodsList = []
@@ -60,7 +58,7 @@ export default {
       }, 500)
     },
     // 获取总的数据列表
-    async getGoodsList () {
+    async getGoodsList() {
       const { data } = await this.$http.get('/api/getgoods', { params: this.query })
       // console.log(data)
       this.loading = false
@@ -71,7 +69,7 @@ export default {
         this.finished = true
       }
     },
-    toDetails (id) {
+    toDetails(id) {
       this.$router.push('/goods/detail/' + id)
     }
   }

@@ -1,27 +1,32 @@
 <template>
-  <div class="news">
-    <h3 class="tit">{{DetaList.title}}</h3>
+  <div>
+    <Header nav2="黑马程序员"></Header>
+    <div class="news">
+    <h3 class="tit">{{ DetaList.title }}</h3>
     <div class="info">
-      <span class="sj">发表时间: {{DetaList.add_time|dataFormat}}</span>
-      <span class="dj">点击次数: {{DetaList.click}}</span>
+      <span class="sj">发表时间: {{ DetaList.add_time | dataFormat }}</span>
+      <span class="dj">点击次数: {{ DetaList.click }}</span>
     </div>
     <div class="content"></div>
+    </div>
+    <pinglun></pinglun>
+    <Tab></Tab>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       DetaList: {}
     }
   },
-  created () {
+  created() {
     let newId = this.$route.params.id
     this.shuju(newId)
   },
   methods: {
-    async shuju (id) {
+    async shuju(id) {
       const { data: res } = await this.$http.get('/api/getnew/' + id)
       if (res.status !== 0) {
         return this.Toast.fail('文章列表加载失败')
@@ -36,7 +41,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
- .content {
+Header {
+  padding: 0 !important;
+}
+.content {
   text-align: left;
   // text-indent:2em;
 }

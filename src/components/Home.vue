@@ -42,32 +42,30 @@
 export default {
   data() {
     return {
-         swipeList: []
+      swipeList: []
     }
   },
   created() {
-      this.getSwipe()
-
+    this.getSwipe()
   },
   methods: {
-        async getSwipe() {
-      const {data: res} = await this.$http.get('/api/getlunbo')
+    async getSwipe() {
+      const { data: res } = await this.$http.get('/api/getlunbo')
       console.log(res)
       this.swipeList = res.message
       console.log(this.swipeList)
     }
-
   }
 }
 </script>
 
 <style lang="less" scoped>
- .van-swipe-item  img{
-    width: 100%;
-    height: 200px;
-  }
- .van-grid-item__text {
-    font-size: 14px;
+.van-swipe-item img {
+  width: 100%;
+  height: 200px;
+}
+.van-grid-item__text {
+  font-size: 14px;
 }
 .van-grid-item img {
   width: 60px;
@@ -76,5 +74,4 @@ export default {
 .van-grid-item p {
   font-size: 14px;
 }
-
 </style>

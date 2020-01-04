@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header nav2="黑马程序员"></Header>
     <div v-for="index in tuwen" :key="index.id">
       <van-row type="flex" justify="center">
         <van-col span="18">
@@ -23,6 +24,7 @@
       <p>{{ index.content }}</p>
     </div>
     <pinglun></pinglun>
+    <Tab></Tab>
   </div>
 </template>
 

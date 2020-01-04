@@ -1,6 +1,8 @@
 <template>
   <div class="box">
     <!--  轮播图 -->
+    <Header nav2="黑马程序员"></Header>
+
     <div class="swiper all">
       <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(item, i) in imgList" :key="i">
@@ -10,12 +12,12 @@
     </div>
     <!-- 加入购物车 -->
     <div class="add_cart all">
-      <span class="span_head" v-for="(item, i) in cateList" :key="i">{{item.title}}</span>
-      <div class="add_body" v-for="(sub) in imgInfo" :key="sub.id">
+      <span class="span_head" v-for="(item, i) in cateList" :key="i">{{ item.title }}</span>
+      <div class="add_body" v-for="sub in imgInfo" :key="sub.id">
         <p class="p_head">
           市场价:
-          <del>￥{{sub.market_price}}</del> 销售价:
-          <i>￥{{sub.sell_price}}</i>
+          <del>￥{{ sub.market_price }}</del> 销售价:
+          <i>￥{{ sub.sell_price }}</i>
         </p>
         <div class="count">
           <span>购买数量</span>
@@ -23,25 +25,26 @@
           <van-stepper v-model="num" min="0" max="10" button-size="30px" />
         </div>
         <div class="btns">
-          <van-button size="normal" type="info">立即购买</van-button>
+          <van-button size="normal" type="info" @click="toCar">立即购买</van-button>
           <van-button size="normal" type="danger" @click="addCar">加入购物车</van-button>
         </div>
       </div>
     </div>
     <!-- 商品参数 -->
-    <div class="cate all" v-for="(item) in imgInfo" :key="item.id">
+    <div class="cate all" v-for="item in imgInfo" :key="item.id">
       <div class="cate_h">商品参数</div>
       <div class="cate_body">
-        <p>商品货号:{{item.goods_no}}</p>
-        <p>库存情况:{{item.stock_quantity}}件</p>
-        <p>上架时间:{{item.add_time}}</p>
+        <p>商品货号:{{ item.goods_no }}</p>
+        <p>库存情况:{{ item.stock_quantity }}件</p>
+        <p>上架时间:{{ item.add_time }}</p>
       </div>
       <!-- 图文介绍和商品评论 -->
       <div class="pros">
         <van-button :block="true" plain type="info" @click="getPhoto(item.id)">图文介绍</van-button>
-        <van-button :block="true" plain type="danger">商品评论</van-button>
+        <van-button :block="true" plain type="danger" @click="pl">商品评论</van-button>
       </div>
     </div>
+    <Tab></Tab>
   </div>
 </template>
 
@@ -109,6 +112,13 @@ export default {
     //  去往图文介绍页面
     getPhoto(id) {
       this.$router.push('/goodsdesc/' + id)
+    },
+    pl() {
+      this.$router.push('/goodscomments')
+    },
+    //  去往购物车
+    toCar() {
+      this.$router.push('/shopcar')
     }
   },
   computed: {}

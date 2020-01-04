@@ -1,28 +1,31 @@
 <template>
   <div>
-      <h4 v-for='(item, i) in cateList' :key="i" class="goods_title">{{item.title}}</h4>
-      <hr>
-      <div class="goods_content">
-          <p class="goods_con"></p>
-      </div>
+    <Header nav2="黑马程序员"></Header>
+
+    <h4 v-for="(item, i) in cateList" :key="i" class="goods_title">{{ item.title }}</h4>
+    <hr />
+    <div class="goods_content">
+      <p class="goods_con"></p>
+    </div>
+    <Tab></Tab>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 参数列表
       cateList: []
     }
   },
-  created () {
+  created() {
     //   获取图片信息
     this.getInfor()
   },
   methods: {
     //   获取商品详情信息
-    async getInfor () {
+    async getInfor() {
       let newId = this.$route.params.id
       const { data: res } = await this.$http.get(`/api/goods/getdesc/${newId}`)
       //   console.log(res)
@@ -40,12 +43,12 @@ export default {
 
 <style lang="less" scoped>
 .goods_title {
-    font-size: 16px;
-    color: #226aff;
-    text-align: center;
+  font-size: 16px;
+  color: #226aff;
+  text-align: center;
 }
 .goods_content {
-    padding: 5px;
-    text-align: left;
+  padding: 5px;
+  text-align: left;
 }
 </style>

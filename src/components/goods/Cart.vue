@@ -1,14 +1,11 @@
 <template>
   <div>
+    <Header nav2="黑马程序员"></Header>
+
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh" success-text="刷新成功">
       <div v-for="item in goodsAll" :key="item.id">
         <van-swipe-cell>
-          <van-card
-            :num="item.cou"
-            :desc="'￥' + item.sell_price"
-            :title="item.title"
-            :thumb="item.thumb_path"
-          >
+          <van-card :num="item.cou" :desc="'￥' + item.sell_price" :title="item.title" :thumb="item.thumb_path">
             <!-- 加减按钮 -->
             <template slot="footer">
               <van-stepper v-model="item.cou" min="1" @change="onChange(item.id)" />
@@ -23,6 +20,7 @@
       </div>
     </van-pull-refresh>
     <van-submit-bar :price="total * 100" button-text="提交订单" />
+    <Tab></Tab>
   </div>
 </template>
 

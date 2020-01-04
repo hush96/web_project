@@ -1,48 +1,34 @@
 <template>
   <div>
-   <Header nav1="返回" nav2="黑马程序员.vant" nav3="添加"></Header>
-    <van-search
-      v-model="value"
-      placeholder="请输入搜索关键词"
-      show-action
-      shape="square"
-      @search="onSearch"
-    >
+    <Header nav1="返回" nav2="黑马程序员.vant" nav3="添加"></Header>
+    <van-search v-model="value" placeholder="请输入搜索关键词" show-action shape="square" @search="onSearch">
       <div slot="action" @click="handlequxiao">取消</div>
     </van-search>
 
-    <van-list
-      :style="{ display : flag}"
-      v-model="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="onLoad"
-    >
+    <van-list :style="{ display: flag }" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <van-swipe-cell v-for="item in list" :key="item.id">
-        <van-cell :title="item.name">
-          商品上架时间 {{item.ctime|dataFormat}}
-        </van-cell>
+        <van-cell :title="item.name"> 商品上架时间 {{ item.ctime | dataFormat }} </van-cell>
         <template slot="right">
           <van-button square type="danger" text="删除" @click="handleDel()" />
         </template>
       </van-swipe-cell>
     </van-list>
-    <div :style="{display : flag1}">
+    <div :style="{ display: flag1 }">
       <van-row type="flex" justify="space-between">
         <van-col span="6">搜索历史</van-col>
 
         <van-col span="1">
-          <van-icon  name="delete" @click="handleDelete" />
+          <van-icon name="delete" @click="handleDelete" />
         </van-col>
       </van-row>
-      <van-row >
-        <van-col class="hh" v-for="(item,index) in haha" :key="index">{{item}}</van-col>
+      <van-row>
+        <van-col class="hh" v-for="(item, index) in haha" :key="index">{{ item }}</van-col>
       </van-row>
-      <van-row :style="{display : flag2}">
+      <van-row :style="{ display: flag2 }">
         <van-divider :style="{ color: '#969799', borderColor: 'inherit', padding: '0 40px' }">暂无搜索历史</van-divider>
       </van-row>
     </div>
-     <Tab></Tab>
+    <Tab></Tab>
   </div>
 </template>
 
@@ -58,15 +44,16 @@ export default {
       haha: [],
       loading: false,
       finished: false,
-      active: 0,
+      active: 0
     }
   },
 
   created() {
-    this.haha = JSON.parse(window.localStorage.getItem('haha'))
     if (this.haha.length >= 1) {
-        this.flag2 = 'none'
-      }
+      this.flag2 = 'none'
+    }
+    this.haha = JSON.parse(window.localStorage.getItem('haha')) || []
+    console.log(JSON.parse(window.localStorage.getItem('haha')))
   },
   methods: {
     async onSearch() {
@@ -111,15 +98,14 @@ export default {
       this.flag2 = 'block'
       // const history = JSON.parse(window.localStorage.getItem('haha'))
       // console.log(history)
-       window.localStorage.removeItem('haha')
+      window.localStorage.removeItem('haha')
       // window.localStorage.setItem('haha',JSON.stringify(history))
-      
     },
     handleDel(id) {
       const index = this.list.findIndex(item => item.id === id)
       this.list.splice(index, 1)
       console.log(this.list)
-    },
+    }
   }
 }
 </script>

@@ -1,25 +1,27 @@
 <template>
   <div>
-    <lazy-component>
-      <!-- 加载 -->
-      <van-loading type="spinner" color="#1989fa" v-if="isShow" />
-      <!-- 下拉刷新 -->
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <van-card v-for="item in list" :key="item.id" :title="item.title" :thumb="item.img_url" @click="toDetalist(item.id)">
-          <div slot="bottom">
-            <div slot="price"
-                 class="pri">发表时间: {{item.add_time|dataFormat}}</div>
-            <div slot="num" class="num">点击: {{item.click}}</div>
-          </div>
-        </van-card>
-      </van-pull-refresh>
-    </lazy-component>
+    <Header nav2="黑马程序员"></Header>
+
+    <!-- <lazy-component> -->
+    <!-- 加载 -->
+    <van-loading type="spinner" color="#1989fa" v-if="isShow" />
+    <!-- 下拉刷新 -->
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <van-card v-for="item in list" :key="item.id" :title="item.title" :thumb="item.img_url" @click="toDetalist(item.id)">
+        <div slot="bottom">
+          <div slot="price" class="pri">发表时间: {{ item.add_time | dataFormat }}</div>
+          <div slot="num" class="num">点击: {{ item.click }}</div>
+        </div>
+      </van-card>
+    </van-pull-refresh>
+    <!-- </lazy-component> -->
+    <Tab></Tab>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 获取到数据
       list: [],
@@ -27,11 +29,11 @@ export default {
       isShow: true
     }
   },
-  created () {
+  created() {
     this.hangle()
   },
   methods: {
-    async hangle () {
+    async hangle() {
       const { data: res } = await this.$http.get('/api/getnewslist')
       console.log(res)
       if (res.status !== 0) {
@@ -41,10 +43,10 @@ export default {
       this.isShow = false
       // console.log(this.list)
     },
-    toDetalist (id) {
+    toDetalist(id) {
       this.$router.push('/news/detail/' + id)
     },
-    onRefresh () {
+    onRefresh() {
       setTimeout(() => {
         this.hangle()
         this.$toast('刷新成功')

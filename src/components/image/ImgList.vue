@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Header nav2="黑马程序员"></Header>
+
     <van-tabs>
       <van-tab :key="index.id" v-for="index in tab" :title="index.title">
         <ul>
@@ -12,6 +14,7 @@
         </ul>
       </van-tab>
     </van-tabs>
+    <Tab></Tab>
   </div>
 </template>
 
@@ -59,7 +62,6 @@ export default {
 }
 li {
   position: relative;
-  
 }
 .zi {
   width: 350px;
@@ -67,8 +69,8 @@ li {
   margin-top: 10px;
   position: absolute;
   bottom: 10px;
-  background: rgba(0,0,0,.4);
-  font-size:12px;
-  color:#fff
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+  color: #fff;
 }
 </style>
