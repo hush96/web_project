@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ImgList from '../components/ImgList.vue'
-import imgDatails from '../components/imgDatails.vue'
+import ImgList from '../components/image/ImgList.vue'
+import imgDatails from '../components/image/imgDatails.vue'
 import axios from 'axios'
 
 Vue.use(VueRouter)
