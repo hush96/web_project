@@ -63,7 +63,7 @@ export default {
   methods: {
     addCar () {
       // 触发方法
-      this.$store.commit('add2Car', {
+      this.$store.commit('add', {
         id: this.$route.params.id,
         num: this.num
       })
