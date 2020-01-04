@@ -1,6 +1,7 @@
 <template>
   <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
      <van-pull-refresh v-model="isLoading" @refresh="onRefresh" success-text="刷新成功">
       <van-swipe-cell>
     <van-card
@@ -24,6 +25,8 @@
     <!-- <van-submit-bar :price="$store.getters.money" button-text="提交订单" /> -->
     <van-submit-bar :price="$store.getters.money" button-text="提交订单" />
 =======
+=======
+>>>>>>> goods
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh" success-text="刷新成功">
       <van-swipe-cell>
         <van-card
@@ -47,11 +50,15 @@
       </van-swipe-cell>
     </van-pull-refresh>
     <van-submit-bar :price="allPrice * 100" button-text="提交订单" />
+<<<<<<< HEAD
+>>>>>>> goods
+=======
 >>>>>>> goods
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 <<<<<<< HEAD
 // import { mapGetters } from 'vuex'
 export default {
@@ -81,6 +88,8 @@ export default {
     // ...mapState(['goodList', 'num']),
     // ...mapGetters(['money'])
 =======
+=======
+>>>>>>> goods
 export default {
   data() {
     return {
@@ -128,6 +137,9 @@ export default {
     }
   },
   computed: {
+<<<<<<< HEAD
+>>>>>>> goods
+=======
 >>>>>>> goods
   }
 }
@@ -135,7 +147,11 @@ export default {
 
 <style lang="less" scoped>
 <<<<<<< HEAD
+<<<<<<< HEAD
 .van-card__price{
+=======
+.van-card__price {
+>>>>>>> goods
 =======
 .van-card__price {
 >>>>>>> goods
@@ -146,11 +162,17 @@ export default {
   margin-bottom: 45px;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> goods
 .van-card__desc {
   float: left;
   color: red;
   padding-left: 15px;
 }
+<<<<<<< HEAD
+>>>>>>> goods
+=======
 >>>>>>> goods
 </style>
