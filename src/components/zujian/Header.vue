@@ -6,17 +6,22 @@
       {{ nav1 }}
     </span>
     {{ nav2 }}
+    <span class="add" @click="addgood" >{{ nav3 }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['nav1', 'nav2'],
+  props: ['nav1', 'nav2', 'nav3'],
   data() {
     return {}
   },
   created() {},
-  methods: {}
+  methods: {
+    addgood() {
+      this.$router.push('/addgoods')
+    }
+  }
 }
 </script>
 
@@ -32,6 +37,10 @@ export default {
 .goback {
   position: absolute;
   left: 0;
+}
+.add{
+  position: absolute;
+  right: 20px;
 }
 .van-icon-arrow-left::before{
   margin-left: 10px;

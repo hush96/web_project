@@ -4,10 +4,10 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import './plugins/vant'
-import Header from './components/Header.vue'
+import Header from './components/zujian/Header.vue'
 
 // 底部封装的组件
-import Tab from './components/Tab.vue'
+import Tab from './components/zujian/Tab.vue'
 
 Vue.component('Header', Header)
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-   <Header nav1="返回" nav2="黑马程序员.vant"></Header>
+   <Header nav1="返回" nav2="黑马程序员.vant" nav3="添加"></Header>
     <van-search
       v-model="value"
       placeholder="请输入搜索关键词"
@@ -19,7 +19,9 @@
       @load="onLoad"
     >
       <van-swipe-cell v-for="item in list" :key="item.id">
-        <van-cell :title="item.name" :value="item.ctime|dataFormat" />
+        <van-cell :title="item.name">
+          商品上架时间 {{item.ctime|dataFormat}}
+        </van-cell>
         <template slot="right">
           <van-button square type="danger" text="删除" @click="handleDel()" />
         </template>
@@ -33,7 +35,7 @@
           <van-icon  name="delete" @click="handleDelete" />
         </van-col>
       </van-row>
-      <van-row type="flex">
+      <van-row >
         <van-col class="hh" v-for="(item,index) in haha" :key="index">{{item}}</van-col>
       </van-row>
       <van-row :style="{display : flag2}">
@@ -60,7 +62,12 @@ export default {
     }
   },
 
-  created() {},
+  created() {
+    this.haha = JSON.parse(window.localStorage.getItem('haha'))
+    if (this.haha.length >= 1) {
+        this.flag2 = 'none'
+      }
+  },
   methods: {
     async onSearch() {
       if (this.value.trim() === '') {
@@ -69,6 +76,7 @@ export default {
         this.flag = 'block'
         this.flag1 = 'none'
         this.haha.push(this.value)
+        window.localStorage.setItem('haha', JSON.stringify(this.haha))
         const { data: res } = await this.$http.get('/api/getprodlist')
         console.log(res)
         this.list = res.message
@@ -101,18 +109,17 @@ export default {
     handleDelete() {
       this.haha = []
       this.flag2 = 'block'
+      // const history = JSON.parse(window.localStorage.getItem('haha'))
+      // console.log(history)
+       window.localStorage.removeItem('haha')
+      // window.localStorage.setItem('haha',JSON.stringify(history))
+      
     },
     handleDel(id) {
       const index = this.list.findIndex(item => item.id === id)
       this.list.splice(index, 1)
       console.log(this.list)
     },
-    onClickLeft() {
-
-    },
-    onClickRight() {
-
-    }
   }
 }
 </script>
@@ -120,20 +127,6 @@ export default {
 <style lang="less" scoped>
 .van-nav-bar {
   background-color: #1989fa;
-  // position: fixed;
-  // width: 100%;
-  
-
-}
-
-.van-icon-arrow-left::before {
-     color: #fff;;
-}
-.van-nav-bar__text {
-  color: #FFF;
-}
-.van-nav-bar__title {
-  color: #FFF;
 }
 .van-row {
   margin: 0 10px;
@@ -141,6 +134,7 @@ export default {
 }
 .hh {
   margin: 10px 5px;
+  padding: 2px;
   background-color: #969799;
 }
 </style>

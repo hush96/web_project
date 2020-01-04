@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../Home.vue'
+import Home from '../components/Home.vue'
 import Search from '../components/Search.vue'
 import Member from '../components/Member.vue'
 import Shopcar from '../components/Shopcar.vue'
+import Addgoods from '../components/Addgoods.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,9 +26,12 @@ const routes = [
   },
   {
     path: '/search',
-    component: Search
+    component: Search,
+  
   },
 
+    { path : '/addgoods' , component: Addgoods}
+  
 ]
 const router = new VueRouter({
   routes
