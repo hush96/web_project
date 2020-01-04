@@ -1,29 +1,28 @@
 <template>
   <div>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh" success-text="刷新成功">
-      <van-swipe-cell>
-        <van-card
-          :num="item.cou"
-          :desc="'￥' + item.sell_price"
-          :title="item.title"
-          :thumb="item.thumb_path"
-          v-for="item in goodsAll"
-          :key="item.id"
-        >
-          <!-- 加减按钮 -->
-          <div slot="footer">
-            <van-stepper :model="num" min="1" @change="onChange" />
-          </div>
+      <div v-for="item in goodsAll" :key="item.id">
+        <van-swipe-cell>
+          <van-card
+            :num="item.cou"
+            :desc="'￥' + item.sell_price"
+            :title="item.title"
+            :thumb="item.thumb_path"
+          >
+            <!-- 加减按钮 -->
+            <template slot="footer">
+              <van-stepper v-model="item.cou" min="1" @change="onChange(item.id)" />
+            </template>
 
-          <!-- 右滑删除 -->
-          <template slot="right">
-            <van-button square type="danger" text="删除" />
-          </template>
-        </van-card>
-      </van-swipe-cell>
+            <!-- 右滑删除 -->
+            <template slot="right">
+              <van-button square type="danger" text="删除" />
+            </template>
+          </van-card>
+        </van-swipe-cell>
+      </div>
     </van-pull-refresh>
-    <van-submit-bar :price="allPrice * 100" button-text="提交订单" />
-
+    <van-submit-bar :price="total * 100" button-text="提交订单" />
   </div>
 </template>
 
@@ -33,8 +32,6 @@ export default {
     return {
       goodList: [],
       goodsAll: [],
-      num: '',
-      allPrice: 0,
       isLoading: false,
       urlId: ''
     }
@@ -46,7 +43,15 @@ export default {
   },
   methods: {
     // 异步获取按钮num
-    onChange(num) {},
+    onChange(id) {
+      id = id + ''
+      const index = this.goodList.findIndex(item => item.id === id)
+      this.goodList.forEach((item, index) => {
+        item.num = this.goodsAll[index].cou
+      })
+      const obj = this.goodList[index]
+      this.$store.commit('edit', obj)
+    },
     // 下拉刷新
     onRefresh() {
       setTimeout(() => {
@@ -69,12 +74,19 @@ export default {
       }
       this.goodsAll = res.message
       console.log(res.message)
-      // res.message.forEach(item => {
-      //   this.allPrice += item.sell_price
-      // })
+      this.goodsAll.forEach((item, index) => {
+        item.cou = this.goodList[index].num
+      })
     }
   },
   computed: {
+    total() {
+      let num = 0
+      this.goodList.forEach(item => {
+        num += item.num * item.price
+      })
+      return num
+    }
   }
 }
 </script>

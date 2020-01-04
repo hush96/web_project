@@ -38,6 +38,13 @@ export default new Vuex.Store({
         })
         state.count = num
       }
+    },
+    edit(state, obj) {
+      const index = state.arr.findIndex(item => item.id === obj.id)
+      if (index !== -1) {
+        state.arr[index].num = obj.num
+      }
+      window.localStorage.setItem('arr', JSON.stringify(state.arr))
     }
   },
   actions: {},
