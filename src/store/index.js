@@ -1,5 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+<<<<<<< HEAD
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+
+})
+=======
 import axios from 'axios'
 Vue.use(Vuex)
 
@@ -50,3 +57,4 @@ export default new Vuex.Store({
   actions: {},
   modules: {}
 })
+>>>>>>> e3ac08e75e47316204cf97755f058679cdd8ffa0
